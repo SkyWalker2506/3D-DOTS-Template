@@ -1,3 +1,4 @@
+using System;
 using SkyWalker.DOTS.Movement.ComponentData;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -12,14 +13,6 @@ namespace SkyWalker.DOTS.Movement.Authoring
         [SerializeField] bool useRandomMovement = false;
         [SerializeField] float3 direction = new float3(0, 0, 1);
 
-        float3 GetDirection()
-        {
-            return useRandomMovement ? GetRandomDirection() : direction; 
-        }
-        float3 GetRandomDirection()
-        {
-            return new float3(UnityEngine.Random.Range(-1.0f, 1.0f), 0, UnityEngine.Random.Range(-1.0f, 1.0f));
-        }
 
         class MovementBaker : Baker<MovementAuthoring>
         {
@@ -29,7 +22,15 @@ namespace SkyWalker.DOTS.Movement.Authoring
                 AddComponent(entity, new MoveableTag());
                 AddComponent(entity, new MoveableData {DoMove = true});
                 AddComponent(entity, new SpeedData {Speed = authoring.speed});
-                AddComponent(entity, new DirectionData {Direction = authoring.GetDirection()});
+                if (authoring.useRandomMovement)
+                {
+                    AddComponent(entity, new DirectionData {Direction = float3.zero});
+                    AddComponent(entity, new SetRandomDirectionTag());
+                }
+                else
+                {
+                    AddComponent(entity, new DirectionData {Direction = authoring.direction});
+                }
             }
         }
     }

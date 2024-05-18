@@ -1,4 +1,3 @@
-
 using SkyWalker.DOTS.Movement.ComponentData;
 using Unity.Burst;
 using Unity.Collections;
