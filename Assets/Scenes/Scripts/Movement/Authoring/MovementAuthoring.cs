@@ -42,7 +42,7 @@ namespace SkyWalker.DOTS.Movement.Authoring
                     case MovementType.Physics:
                         AddComponent(entity, new PhysicsMovementTag());
                         AddComponent(entity, new PhysicsMass {InverseMass = 1.0f});
-                        AddComponent(entity, new AddPhysicsVelocityTag());
+                        AddComponent(entity, new PhysicsVelocity {Linear = float3.zero});
                         break;
                 }
             }
