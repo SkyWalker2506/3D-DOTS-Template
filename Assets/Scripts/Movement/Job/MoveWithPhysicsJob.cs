@@ -4,7 +4,6 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
-using Unity.Transforms;
 
 namespace SkyWalker.DOTS.Movement.Job
 {
@@ -21,7 +20,6 @@ namespace SkyWalker.DOTS.Movement.Job
             physicsVelocity.Linear = directionData.NormalizedDirection * speedData.Speed*DeltaTime;
         }
     }
-
 }
 
 
