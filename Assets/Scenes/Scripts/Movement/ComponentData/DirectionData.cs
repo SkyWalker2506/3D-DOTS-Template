@@ -5,7 +5,20 @@ namespace SkyWalker.DOTS.Movement.ComponentData
 
     public struct DirectionData : IComponentData
     {
-        public float3 Direction;
+        public float3 NormalizedDirection;
+        float3 direction;
+        public float3 Direction{ 
+            get 
+            {
+                return direction;
+            }
+            set 
+            {
+                direction = value;
+                NormalizedDirection = math.normalize(value);
+            }
+        }
+        
     }
     
 }

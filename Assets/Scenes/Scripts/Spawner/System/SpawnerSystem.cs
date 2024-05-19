@@ -26,7 +26,7 @@ namespace SkyWalker.DOTS.Movement.System
                     Prefab = spawnerData.ValueRO.Prefab,
                     SpawnPosition = spawnerData.ValueRO.SpawnPosition,
                     ECB = ParallelWriter
-                }.ScheduleParallel(spawnerData.ValueRO.SpawnAmount, 25, state.Dependency);
+                }.ScheduleParallel(spawnerData.ValueRO.SpawnAmount, spawnerData.ValueRO.SpawnAmount/1000, state.Dependency);
                 spawnerJob.Complete();
                 entityCommandBuffer.RemoveComponent<SpawnerData>(entity);
             }
