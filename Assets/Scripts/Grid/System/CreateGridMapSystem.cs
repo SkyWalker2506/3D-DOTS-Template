@@ -8,14 +8,14 @@ namespace SkyWalker.DOTS.Grid.System
         public void OnUpdate(ref SystemState state)
         {
 
-            var ecb = state.World.GetOrCreateSystemManaged<BeginInitializationEntityCommandBufferSystem>().CreateCommandBuffer();
+            var ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
             var parallelWriter = ecb.AsParallelWriter();
             var createGridMapJob = new CreateGridMapJob
             {
                 ParallelWriter = parallelWriter
             }.ScheduleParallel(state.Dependency);
             createGridMapJob.Complete();
-
+      
             var updateVisualJob = new UpdateGridVisualJob
             {
                 ParallelWriter = parallelWriter

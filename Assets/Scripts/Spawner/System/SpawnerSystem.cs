@@ -1,6 +1,5 @@
 using SkyWalker.DOTS.Movement.Job;
 using SkyWalker.DOTS.Spawner.ComponentData;
-using Unity.Burst;
 using Unity.Entities;
 using Unity.Jobs;
 

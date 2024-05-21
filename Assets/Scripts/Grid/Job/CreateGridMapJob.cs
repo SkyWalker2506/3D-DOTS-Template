@@ -46,6 +46,7 @@ namespace SkyWalker.DOTS.Grid.Job
                         }
                     };
                     gridCellBuffer.Add(newGridCellBuffer);
+
                 }
             }
 

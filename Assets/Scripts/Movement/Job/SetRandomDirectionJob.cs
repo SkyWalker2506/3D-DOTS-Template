@@ -15,7 +15,7 @@ namespace SkyWalker.DOTS.Movement.Job
         public EntityCommandBuffer.ParallelWriter ECB;
         
         [BurstCompile]
-        public void Execute(in Entity entity,in SetRandomDirectionTag setRandomDirectionTag, ref DirectionData directionData,  [ChunkIndexInQuery] int index)
+        public void Execute(in Entity entity, in SetRandomDirectionTag setRandomDirectionTag, ref DirectionData directionData,  [ChunkIndexInQuery] int index)
         {
            directionData.Direction = new float3(Random.NextFloat()* 2 - 1, 0, Random.NextFloat()* 2 - 1);
            ECB.RemoveComponent<SetRandomDirectionTag>(index, entity);

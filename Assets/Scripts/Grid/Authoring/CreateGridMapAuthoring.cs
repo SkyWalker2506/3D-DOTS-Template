@@ -26,8 +26,7 @@ namespace SkyWalker.DOTS.Grid.Authoring
                 var builder = new BlobBuilder(Allocator.Temp);
                 ref var root = ref builder.ConstructRoot<uint>();
                 BlobAssetReference<uint> lastMapIndex = builder.CreateBlobAssetReference<uint>(Allocator.Persistent);
-                BlobAssetReference<Entity> visual = builder.CreateBlobAssetReference<Entity>(Allocator.Persistent);
-                visual.Value = GetEntity(authoring.gridCellVisualPrefab, TransformUsageFlags.Renderable);
+                var visual = GetEntity(authoring.gridCellVisualPrefab, TransformUsageFlags.Renderable);
                 AddComponent(entity, new GridMapData
                 {
                     MapSize = authoring.mapSize,

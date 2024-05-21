@@ -14,7 +14,7 @@ namespace SkyWalker.DOTS.Grid.ComponentData
         public bool CreateOrUpdateMap;
         public bool UpdateGridVisual;
         public BlobAssetReference<uint> LastMapIndex; 
-        public BlobAssetReference<Entity> Visual; 
+        public Entity Visual; 
          
 
     }

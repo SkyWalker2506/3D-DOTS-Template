@@ -7,4 +7,8 @@ namespace SkyWalker.DOTS.Grid.ComponentData
         public GridCellData GridCell;
         public GridMapCellVisualData GridCellVisual;
     }
+
+
+
+    
 }
