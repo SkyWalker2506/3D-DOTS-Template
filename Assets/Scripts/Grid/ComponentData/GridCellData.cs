@@ -5,9 +5,9 @@ namespace SkyWalker.DOTS.Grid.ComponentData
 
     public struct GridCellData : IComponentData
     {
+        public Entity Entity;
         public int2 GridIndex;
         public float2 GridPosition;
         public float3 WorldPosition;
-
     }
 }

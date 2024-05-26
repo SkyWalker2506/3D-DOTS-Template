@@ -40,14 +40,38 @@ namespace SkyWalker.DOTS.Grid.Job
                     {
                         GridCell = new GridCellData
                         {
+                            Entity = ParallelWriter.CreateEntity(index),
                             GridIndex = new int2(x, y),
                             GridPosition = cellPosition,
                             WorldPosition = worldPosition
                         }
                     };
                     gridCellBuffer.Add(newGridCellBuffer);
-                    
                 }
+            }
+
+            for (int i = 0; i < gridCellBuffer.Length; i++)
+            {
+                var gridCell = gridCellBuffer[i];
+                var gridCellData = gridCell.GridCell;
+                var neighbourBuffer = ParallelWriter.AddBuffer<GridCellNeighbourBuffer>(index, gridCellData.Entity);
+
+                for (int x = -1; x <= 1; x++)
+                {
+                    for (int y = -1; y <= 1; y++)
+                    {
+                        if (x == 0 && y == 0) continue;
+                        var neighbourIndex = gridCellData.GridIndex + new int2(x, y);
+                        if (neighbourIndex.x < 0 || neighbourIndex.x >= gridMapData.CellCount.x || neighbourIndex.y < 0 || neighbourIndex.y >= gridMapData.CellCount.y) continue;
+                        GridCellBuffer neighbour = gridCellBuffer[neighbourIndex.x * gridMapData.CellCount.y + neighbourIndex.y];
+                        neighbourBuffer.Add(new GridCellNeighbourBuffer {Neighbour = neighbour.GridCell});
+                    }
+                }
+                for (int j = 0; j < neighbourBuffer.Length; j++)
+                {
+                    Debug.Log("Cell " + gridCellData.GridIndex + " has neighbour " + neighbourBuffer[j].Neighbour.GridIndex);
+                }
+                //gridCell.GridCell.Neighbours = neighbours;
             }
 
             gridMapData.CreateOrUpdateMap = false;

@@ -6,5 +6,5 @@ namespace SkyWalker.DOTS.Grid.ComponentData
     {
         public GridCellData GridCell;
     }
-    
+
 }
