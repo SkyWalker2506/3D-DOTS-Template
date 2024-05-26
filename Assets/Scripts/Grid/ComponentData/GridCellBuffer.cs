@@ -5,10 +5,6 @@ namespace SkyWalker.DOTS.Grid.ComponentData
     public struct GridCellBuffer : IBufferElementData
     {
         public GridCellData GridCell;
-        public GridMapCellVisualData GridCellVisual;
     }
-
-
-
     
 }

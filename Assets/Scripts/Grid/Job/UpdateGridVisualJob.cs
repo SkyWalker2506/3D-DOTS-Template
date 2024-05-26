@@ -1,58 +1,50 @@
 using SkyWalker.DOTS.Grid.ComponentData;
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace SkyWalker.DOTS.Grid.Job
 {
+    [BurstCompile]
     public partial struct UpdateGridVisualJob : IJobEntity
     {
         public EntityCommandBuffer.ParallelWriter ParallelWriter;
 
-        public void Execute(in Entity entity, ref GridMapData gridMapData, ref DynamicBuffer<GridCellBuffer> gridCellBuffer)
+        [BurstCompile]
+        public void Execute(in Entity entity, ref GridMapData gridMapData, in DynamicBuffer<GridCellBuffer> gridCellBuffer,ref DynamicBuffer<GridCellVisualBuffer> gridCellVisualBuffer, [ChunkIndexInQuery] int index)
         {
             if (!gridMapData.UpdateGridVisual) return;
-            if (gridMapData.Visual==Entity.Null) return;
-            Debug.Log("UpdateGridVisualJobStart");
+            if (gridMapData.Visual == Entity.Null) return;
             var size = gridMapData.MapSize/gridMapData.CellCount;
-            Debug.Log("size: "+size);
+            for (int i = 0; i < gridCellVisualBuffer.Length; i++)
+            {
+                if (gridCellVisualBuffer[i].GridCellVisual != Entity.Null)
+                {
+                    ParallelWriter.DestroyEntity(index, gridCellVisualBuffer[i].GridCellVisual);
+                }
+            }
+
+            gridCellVisualBuffer.Clear();
 
             for (int i = 0; i < gridCellBuffer.Length; i++)
             {
-                var cellIndex = i;
-                if (gridCellBuffer[i].GridCellVisual.Visual != Entity.Null)
-                {
-                    ParallelWriter.DestroyEntity(cellIndex, gridCellBuffer[i].GridCellVisual.Visual);
-                }
-                if(gridCellBuffer[cellIndex].GridCellVisual.Visual != Entity.Null)
-                {
-                    ParallelWriter.DestroyEntity(cellIndex, gridCellBuffer[cellIndex].GridCellVisual.Visual);
-                }
+                Entity visual = ParallelWriter.Instantiate(index, gridMapData.Visual);
 
-                Entity visual = ParallelWriter.Instantiate(cellIndex, gridMapData.Visual);
+                ParallelWriter.SetComponent(index, visual, LocalTransform.FromPosition(gridCellBuffer[i].GridCell.WorldPosition));
 
-
-                ParallelWriter.SetComponent(cellIndex, visual, new LocalTransform
+                ParallelWriter.AddComponent(index, visual, new PostTransformMatrix 
                 {
-                    Position = gridCellBuffer[cellIndex].GridCell.WorldPosition,
-                    Scale = 1
+                    Value = float4x4.Scale(new float3(.95f*size.x, .1f, .9f*size.y))
                 });
 
-                ParallelWriter.AddComponent(cellIndex, visual, new PostTransformMatrix 
+                gridCellVisualBuffer.Add(new GridCellVisualBuffer 
                 {
-                    Value = float4x4.Scale(new float3(.95f*size.x, .1f, .95f*size.y))
+                    GridCellVisual =  visual  
                 });
-
-                gridCellBuffer[cellIndex] = new GridCellBuffer 
-                {
-                    GridCell = gridCellBuffer[cellIndex].GridCell,
-                    GridCellVisual = new GridMapCellVisualData { Visual = visual } 
-                };
             }
 
             gridMapData.UpdateGridVisual = false;
-            UnityEngine.Debug.Log("UpdateGridVisualJobEnd");
         }
     }
 }

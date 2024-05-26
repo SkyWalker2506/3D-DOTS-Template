@@ -10,11 +10,10 @@ namespace SkyWalker.DOTS.Movement.System
     public partial struct SpawnerSystem : ISystem
     {
         EntityCommandBuffer entityCommandBuffer; 
-        
 
         public void OnUpdate(ref SystemState state)
         {
-            entityCommandBuffer = state.World.GetOrCreateSystemManaged<BeginInitializationEntityCommandBufferSystem>().CreateCommandBuffer();
+            entityCommandBuffer = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
          
             var ParallelWriter = entityCommandBuffer.AsParallelWriter();
 

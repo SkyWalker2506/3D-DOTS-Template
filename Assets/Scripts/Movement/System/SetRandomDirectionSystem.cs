@@ -12,11 +12,12 @@ namespace SkyWalker.DOTS.Movement.System
         
         public void OnUpdate(ref SystemState state)
         {
-            parallelWriter = state.World.GetOrCreateSystemManaged<BeginInitializationEntityCommandBufferSystem>().CreateCommandBuffer().AsParallelWriter();
+            var ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
+          
             var setRandomDirectionJob = new SetRandomDirectionJob
             {
                 Random = Unity.Mathematics.Random.CreateFromIndex(0),
-                ECB = parallelWriter
+                ECB =  ecb.AsParallelWriter()
             }.ScheduleParallel(state.Dependency);
             setRandomDirectionJob.Complete();
         }

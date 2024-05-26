@@ -38,12 +38,15 @@ namespace SkyWalker.DOTS.Grid.Authoring
                     Visual = visual
                 });
 
+                AddBuffer<GridCellBuffer>(entity);
+
+
                 if (authoring.showGridVisual)
                 {
                     AddComponent(entity, new GridMapCellVisualData());
+                    AddBuffer<GridCellVisualBuffer>(entity);
                 }
 
-                AddBuffer<GridCellBuffer>(entity);
             }
         }
     }
