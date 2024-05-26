@@ -8,5 +8,6 @@ namespace SkyWalker.DOTS.Grid.ComponentData
         public int2 GridIndex;
         public float2 GridPosition;
         public float3 WorldPosition;
+
     }
 }

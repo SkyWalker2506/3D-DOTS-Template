@@ -9,6 +9,7 @@ namespace SkyWalker.DOTS.Movement.System
     [UpdateInGroup(typeof(PhysicsSystemGroup))]
     public partial struct MoveWithPhysicsSystem : ISystem
     {
+
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
