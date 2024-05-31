@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5530290182860460764}
   - component: {fileID: 6597350089332378376}
+  - component: {fileID: 3639496594492374513}
   m_Layer: 0
   m_Name: GridMap
   m_TagString: Untagged
@@ -52,8 +53,20 @@ MonoBehaviour:
     y: 0
     z: 0
   cellCount:
-    x: 100
-    y: 100
+    x: 20
+    y: 20
   createMap: 1
-  showGridVisual: 1
-  gridCellVisualPrefab: {fileID: 2373482093740816148, guid: e78abaaaa114a478c8d500a5e86f397b, type: 3}
+  cellPrefab: {fileID: 1886003981640000571, guid: eaa1b9ca7df8a4927bff704d04ebb2e3, type: 3}
+--- !u!114 &3639496594492374513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5133740440323983232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b4841f6732b04470b5f7f627bf7a177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualPrefab: {fileID: 2373482093740816148, guid: e78abaaaa114a478c8d500a5e86f397b, type: 3}

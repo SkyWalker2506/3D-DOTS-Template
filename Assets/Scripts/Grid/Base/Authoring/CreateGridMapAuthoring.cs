@@ -7,45 +7,33 @@ using UnityEngine;
 
 namespace SkyWalker.DOTS.Grid.Authoring
 {
+
     public class CreateGridMapAuthoring : MonoBehaviour
     {
-
         [SerializeField] float2 mapSize = new float2(100, 100);
         [SerializeField] float3 mapCenter = new float3(0, 0, 0);
         [SerializeField] int2 cellCount = new int2(10, 10);
         [SerializeField] bool createMap = true;
-        [SerializeField] bool showGridVisual = true;
-        [SerializeField] GameObject gridCellVisualPrefab;
+        [SerializeField] GameObject cellPrefab;
 
         class CreateGridMapBaker : Baker<CreateGridMapAuthoring>
         {
             public override void Bake(CreateGridMapAuthoring authoring)
             {
-                var entity = GetEntity(TransformUsageFlags.None);
-            
-                var builder = new BlobBuilder(Allocator.Temp);
-                ref var root = ref builder.ConstructRoot<uint>();
-                BlobAssetReference<uint> lastMapIndex = builder.CreateBlobAssetReference<uint>(Allocator.Persistent);
-                var visual = GetEntity(authoring.gridCellVisualPrefab, TransformUsageFlags.Renderable);
+                var entity = GetEntity(TransformUsageFlags.WorldSpace);
+                var cellPrefab = GetEntity(authoring.cellPrefab, TransformUsageFlags.WorldSpace);
+
                 AddComponent(entity, new GridMapData
                 {
+                    GridMapPrefab = entity,
+                    CellPrefab = cellPrefab,
                     MapSize = authoring.mapSize,
                     MapCenter = authoring.mapCenter,
                     CellCount = authoring.cellCount,
                     CreateOrUpdateMap = authoring.createMap,
-                    UpdateGridVisual= authoring.showGridVisual,
-                    LastMapIndex = lastMapIndex,
-                    Visual = visual
                 });
 
                 AddBuffer<GridCellBuffer>(entity);
-
-
-                if (authoring.showGridVisual)
-                {
-                    AddComponent(entity, new GridMapCellVisualData());
-                    AddBuffer<GridCellVisualBuffer>(entity);
-                }
 
             }
         }
