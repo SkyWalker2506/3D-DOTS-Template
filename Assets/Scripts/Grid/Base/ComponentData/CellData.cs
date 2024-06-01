@@ -3,7 +3,7 @@ namespace SkyWalker.DOTS.Grid.ComponentData
     using Unity.Entities;
     using Unity.Mathematics;
 
-    public struct GridCellData : IComponentData
+    public struct CellData : IComponentData
     {
         public Entity Entity;
         public int2 GridIndex;

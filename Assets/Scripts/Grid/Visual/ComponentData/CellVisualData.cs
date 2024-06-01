@@ -6,4 +6,5 @@ namespace SkyWalker.DOTS.Grid.Visual.ComponentData
     {
         public Entity Visual; 
     }
+
 }

@@ -14,7 +14,7 @@ namespace SkyWalker.DOTS.Grid.Visual.Job
         public EntityCommandBuffer.ParallelWriter ECB;
 
         [BurstCompile]
-        public void Execute(in UpdateCellTag updateCellTag, ref GridCellData gridCellData, ref CellVisualData gridCellVisualData, [ChunkIndexInQuery] int index)
+        public void Execute(in UpdateCellTag updateCellTag, ref CellData gridCellData, ref CellVisualData gridCellVisualData, [ChunkIndexInQuery] int index)
         {
 
         }

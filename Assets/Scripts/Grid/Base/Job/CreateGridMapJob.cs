@@ -13,7 +13,7 @@ namespace SkyWalker.DOTS.Grid.Job
         public EntityCommandBuffer.ParallelWriter ParallelWriter;
 
        [BurstCompile]
-        public void Execute(ref GridMapData gridMapData, ref DynamicBuffer<GridCellBuffer> gridCellBuffer, [ChunkIndexInQuery] int index)
+        public void Execute(ref GridMapData gridMapData, ref DynamicBuffer<CellBuffer> gridCellBuffer, [ChunkIndexInQuery] int index)
         {
             if (!gridMapData.CreateOrUpdateMap) return;
 
@@ -39,7 +39,7 @@ namespace SkyWalker.DOTS.Grid.Job
                     var cellPosition = new float2(x * cellSize.x, y * cellSize.y);
                     ParallelWriter.AddComponent(index, entity, LocalTransform.FromPosition(new float3(cellPosition.x, 0, cellPosition.y)));
                     
-                    var gridCell = new GridCellData
+                    var gridCell = new CellData
                     {
                         Entity = entity,
                         GridIndex = new int2(x, y),
@@ -50,7 +50,7 @@ namespace SkyWalker.DOTS.Grid.Job
                     ParallelWriter.AddComponent(index, entity, gridCell);
                     ParallelWriter.AddComponent(index, entity, new UpdateCellTag());
                     ParallelWriter.AddComponent(index, entity, new Parent {Value = gridMapData.GridMap});
-                    gridCellBuffer.Add(new GridCellBuffer {GridCell = gridCell});
+                    gridCellBuffer.Add(new CellBuffer {GridCell = gridCell});
                 }
             }
 

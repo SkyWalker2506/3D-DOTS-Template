@@ -35,7 +35,7 @@ namespace SkyWalker.DOTS.Grid.Authoring
                     CreateOrUpdateMap = authoring.createMap,
                 });
 
-                AddBuffer<GridCellBuffer>(entity);
+                AddBuffer<CellBuffer>(entity);
 
             }
         }

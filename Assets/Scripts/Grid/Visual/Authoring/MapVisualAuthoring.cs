@@ -6,7 +6,6 @@ namespace SkyWalker.DOTS.Grid.Visual.Authoring
 {
     public class MapVisualAuthoring : MonoBehaviour
     {
-        
         [SerializeField] private GameObject visualPrefab;
         class MapVisualBaker : Baker<MapVisualAuthoring>
         {
@@ -18,6 +17,9 @@ namespace SkyWalker.DOTS.Grid.Visual.Authoring
                 {
                     VisualPrefab = visual
                 });
+
+                AddBuffer<CellVisualBuffer>(entity);
+
             }
         }
     }
