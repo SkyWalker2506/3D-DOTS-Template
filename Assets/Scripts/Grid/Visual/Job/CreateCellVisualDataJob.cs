@@ -21,14 +21,14 @@ namespace SkyWalker.DOTS.Grid.Visual.Job
             cellVisualBuffer.Clear();
             foreach (var buffer in cellBuffer)
             {
-                var gridCell = buffer.GridCell;
-                Debug.Log(gridCell.GridPosition);
+                var cell = buffer.GridCell;
+                Debug.Log(cell.GridPosition);
                 var visual = ECB.Instantiate(0, showMapVisualData.VisualPrefab);
-                var size = gridCell.CellSize * .9f;
-                ECB.SetComponent(0, visual, LocalTransform.FromPosition(new float3(gridCell.WorldPosition.x, 0, gridCell.WorldPosition.z)));
+                var size = cell.CellSize * .9f;
+                ECB.SetComponent(0, visual, LocalTransform.Identity);
                 ECB.SetComponent(0, visual, new PostTransformMatrix {Value = float4x4.Scale(size.x, 1, size.y)});
                 cellVisualBuffer.Add(new CellVisualBuffer {CellVisual = new CellVisualData {Visual = visual}});
-               // ECB.AddComponent(0, visual, new Parent {Value = entity});
+                ECB.AddComponent(0, visual, new Parent {Value = cell.Entity});
             }
             ECB.SetComponentEnabled<CreateMapVisualData>(0, entity, false);
             

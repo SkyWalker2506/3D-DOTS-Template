@@ -13,7 +13,7 @@ namespace SkyWalker.DOTS.Grid.Visual.System
             new CreateCellVisualDataJob
             {
                 ECB = ecb.AsParallelWriter()
-            }.ScheduleParallel(state.Dependency).Complete();
+            }.Schedule(state.Dependency).Complete();
             
         }
 
