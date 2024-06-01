@@ -15,17 +15,19 @@ namespace SkyWalker.DOTS.Grid.Authoring
         [SerializeField] int2 cellCount = new int2(10, 10);
         [SerializeField] bool createMap = true;
         [SerializeField] GameObject cellPrefab;
+        [SerializeField] GameObject mapPrefab;
 
         class CreateGridMapBaker : Baker<CreateGridMapAuthoring>
         {
             public override void Bake(CreateGridMapAuthoring authoring)
             {
-                var entity = GetEntity(TransformUsageFlags.WorldSpace);
+                var entity = GetEntity(TransformUsageFlags.None);
+                var mapPrefab = GetEntity(authoring.mapPrefab,TransformUsageFlags.WorldSpace);
                 var cellPrefab = GetEntity(authoring.cellPrefab, TransformUsageFlags.WorldSpace);
 
                 AddComponent(entity, new GridMapData
                 {
-                    GridMapPrefab = entity,
+                    GridMapPrefab = mapPrefab,
                     CellPrefab = cellPrefab,
                     MapSize = authoring.mapSize,
                     MapCenter = authoring.mapCenter,
