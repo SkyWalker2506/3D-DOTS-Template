@@ -3,7 +3,7 @@ using Unity.Entities;
 
 namespace SkyWalker.DOTS.Grid.Visual.System
 {
-    [UpdateInGroup(typeof(SimulationSystemGroup),OrderLast = true)]
+    [UpdateInGroup(typeof(SimulationSystemGroup), OrderLast = true)]
     public partial struct CreateCellVisualDataSystem : ISystem
     {
         public void OnUpdate(ref SystemState state)

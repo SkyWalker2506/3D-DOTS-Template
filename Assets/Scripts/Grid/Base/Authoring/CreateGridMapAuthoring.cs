@@ -25,8 +25,9 @@ namespace SkyWalker.DOTS.Grid.Authoring
                 var mapPrefab = GetEntity(authoring.mapPrefab,TransformUsageFlags.WorldSpace);
                 var cellPrefab = GetEntity(authoring.cellPrefab, TransformUsageFlags.WorldSpace);
 
-                AddComponent(entity, new GridMapData
+                AddComponent(entity, new GridMapCreationData
                 {
+                    SelfEntity = entity,
                     GridMapPrefab = mapPrefab,
                     CellPrefab = cellPrefab,
                     MapSize = authoring.mapSize,

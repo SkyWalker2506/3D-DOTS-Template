@@ -14,10 +14,8 @@ namespace SkyWalker.DOTS.Grid.Visual.Job
         public EntityCommandBuffer.ParallelWriter ECB;
 
         [BurstCompile]
-        public void Execute(in Entity entity,in GridMapData gridMapData, in DynamicBuffer<CellBuffer> cellBuffer, ref DynamicBuffer<CellVisualBuffer> cellVisualBuffer, in CreateMapVisualData showMapVisualData, [ChunkIndexInQuery] int index)
+        public void Execute(in Entity entity,in GridMapCreationData gridMapData, in DynamicBuffer<CellBuffer> cellBuffer, ref DynamicBuffer<CellVisualBuffer> cellVisualBuffer, in CreateMapVisualData showMapVisualData, [ChunkIndexInQuery] int index)
         {
-
-            Debug.Log(cellVisualBuffer.Length);
             cellVisualBuffer.Clear();
             foreach (var buffer in cellBuffer)
             {

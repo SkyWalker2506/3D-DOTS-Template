@@ -5,6 +5,7 @@ namespace SkyWalker.DOTS.Grid.ComponentData
 
     public struct CellData : IComponentData
     {
+        public GridMapCreationData OwnerMap;
         public Entity Entity;
         public int2 GridIndex;
         public float2 GridPosition;

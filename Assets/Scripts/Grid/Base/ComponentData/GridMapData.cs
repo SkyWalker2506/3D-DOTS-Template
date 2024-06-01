@@ -3,11 +3,12 @@ namespace SkyWalker.DOTS.Grid.ComponentData
     using Unity.Entities;
     using Unity.Mathematics;
 
-    public struct GridMapData : IComponentData
+    public struct GridMapCreationData : IComponentData
     {
+        public Entity SelfEntity;
         public Entity GridMapPrefab;
         public Entity CellPrefab;
-        public Entity GridMap;
+        public Entity MapEntity;
         public float2 MapSize;
         public float3 MapCenter;
         public int2 CellCount;
