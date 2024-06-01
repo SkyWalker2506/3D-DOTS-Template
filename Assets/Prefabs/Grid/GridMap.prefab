@@ -57,6 +57,7 @@ MonoBehaviour:
     y: 20
   createMap: 1
   cellPrefab: {fileID: 1886003981640000571, guid: eaa1b9ca7df8a4927bff704d04ebb2e3, type: 3}
+  mapPrefab: {fileID: 7147218203747082823, guid: 1ad28a36cea82443296ca2a1494ad8dc, type: 3}
 --- !u!114 &3639496594492374513
 MonoBehaviour:
   m_ObjectHideFlags: 0
