@@ -7,6 +7,7 @@ namespace SkyWalker.DOTS.Grid.Visual.System
     {
         public void OnUpdate(ref SystemState state)
         {
+            return;
             var ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
             var parallelWriter = ecb.AsParallelWriter();
             

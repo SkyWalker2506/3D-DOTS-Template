@@ -8,7 +8,7 @@ namespace SkyWalker.DOTS.Grid.Visual.System
     {
         public void OnUpdate(ref SystemState state)
         {
-            var ecb = SystemAPI.GetSingleton<BeginPresentationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
+            var ecb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
 
             new CreateCellVisualDataJob
             {

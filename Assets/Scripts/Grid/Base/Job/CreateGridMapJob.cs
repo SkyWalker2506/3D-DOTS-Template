@@ -23,7 +23,7 @@ namespace SkyWalker.DOTS.Grid.Job
                 ParallelWriter.DestroyEntity(index, gridMapData.GridMap);
             }
             
-            gridMapData.GridMap = ParallelWriter.CreateEntity(index);
+            gridMapData.GridMap = ParallelWriter.Instantiate(index, gridMapData.GridMapPrefab);
             ParallelWriter.AddComponent(index, gridMapData.GridMap, LocalTransform.Identity); 
             ParallelWriter.AddComponent(index, gridMapData.GridMap, new LocalToWorld()); 
 
